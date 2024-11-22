@@ -1,0 +1,111 @@
+import java.util.Scanner;
+
+/**************************************************************
+* Class to Combine 2 arrays into a new array with array1+array2 columns (GOAL: Heavily Abstraced)
+*
+* Christian Dennis
+* 2024-11-20
+* 0.0.1
+****************************************************************/
+
+public class CombineArrays
+{
+ 
+	public String[][] combineArrays(String[][] initialArray1, String[][] initialArray2) 
+	{
+		//error catching
+		if (initialArray1.length != initialArray2.length)
+		{
+			System.out.println("Error! The Arrays have different row lengths!!");
+			return null; //leave method and return null to indicate error 
+		}
+		
+	 	// Create a new 2d array with +1 column where we can add the 1d array
+	   int rows = initialArray1.length;
+		int cols1 = initialArray1[0].length; //used chat to figure out how to find length of 2d array columns
+		int cols2 = initialArray2[0].length ;
+	   int colsT = cols1 + cols2;
+	        
+	   // New array with additional columns
+	   String[][] appendedArray = new String[rows][colsT];
+	   
+		//iterate thru the rows of the arrays add them to new array
+	   for (int i = 0; i < rows; i++) 
+		{
+			//iterate thru the columns of the ith row OF intitalArray1
+			for(int k=0; k<cols1 ; k++)
+			{
+	      	appendedArray[i][k] = initialArray1[i][k];  
+			}
+			
+			//iterate thru the columns of the ith row OF intitalArray2 setting value of ith row
+			for(int j=0; j<cols2 ; j++)
+			{
+	      	appendedArray[i][cols1+j] = initialArray2[i][j];  
+			}
+			
+	   } //rows and columns of new array are is filled end loop
+	        
+	   return appendedArray;  // Return the new array as a combination of our 2 parameters!!
+		
+	}//close combine array method
+
+
+	//Attempting method/function overloading, 2d array 1d array
+	public String[][] combineArrays(String[][] initialArray1, String[] initialArray2) 
+	{
+		//error catching
+		if (initialArray1.length != initialArray2.length)
+		{
+			System.out.println("Error! The Arrays have different row lengths!!");
+			return null; //leave method and return null to indicate error 
+		}
+		
+	   int rows = initialArray1.length;
+		int cols1 = initialArray1[0].length;
+	   int colsT = cols1 + 1;
+	        
+	   String[][] appendedArray = new String[rows][colsT];
+	   
+	   for (int i = 0; i < rows; i++) 
+		{
+			
+			for(int k=0; k<cols1 ; k++)
+			{
+	      	appendedArray[i][k] = initialArray1[i][k];
+			}
+			appendedArray[i][cols1] = initialArray2[i]; //no longer needs a loop of its own
+			
+	   } 
+	        
+	   return appendedArray;
+		  
+	}//close combine array method
+	
+	//overloading #3 two 1d arrays
+	public String[][] combineArrays(String[] initialArray1, String[] initialArray2) 
+	{
+		//error catching
+		if (initialArray1.length != initialArray2.length)
+		{
+			System.out.println("Error! The Arrays have different row lengths!!");
+			return null; //leave method and return null to indicate error 
+		}
+		
+	   int rows = initialArray1.length;
+	   int colsT = 2;
+	        
+	   String[][] appendedArray = new String[rows][colsT];
+	   
+	   for (int i = 0; i < rows; i++) 
+		{
+			//we can remove the nested for loop as we know our column #
+	      appendedArray[i][0] = initialArray1[i];
+			appendedArray[i][1] = initialArray2[i]; 	
+	   } 
+			        
+	   return appendedArray;
+		  
+	}//close combine array method
+	
+}//close class
